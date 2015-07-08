@@ -40,7 +40,7 @@ for edge in each_csv_row(edges_filename):
 for i, node in enumerate(nodes):
 	inflow = inflows.get(i, 0)
 	outflow = outflows.get(i, 0)
-	if inflow < outflow:
+	if 0 < inflow < outflow:
 		dummy_node_index = len(nodes)
 		nodes.append({
 			"name": "inflow mismatch from " + str(i)
@@ -50,7 +50,7 @@ for i, node in enumerate(nodes):
 			"target": i,
 			"value": outflow - inflow
 		})
-	elif outflow < inflow:
+	elif 0 < outflow < inflow:
 		dummy_node_index = len(nodes)
 		nodes.append({
 			"name": "outflow mismatch from " + str(i)
