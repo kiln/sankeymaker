@@ -38,8 +38,8 @@ function makeDiagram(diagram) {
 	nodes.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 	nodes_enter.append("rect");
 	nodes.select("rect")
+		.attr("width", function(d) { return d.dx; })
 		.attr("height", function(d) { return d.dy; })
-		.attr("width", function(d) { console.log(d, d.width); return d.width || sankey.nodeWidth(); })
 		.attr("fill", function(d) { return d.color; })
 		.attr("opacity", function(d) { return d.opacity; });
 
