@@ -52,8 +52,21 @@ function makeDiagram(diagram) {
 		.attr("stroke", function(d) { return d.color; })
 		.style("opacity", function(d) { return d.opacity; });
 
+	function drag(d) {
+		d.x = Math.max(0, Math.min(width - d.dx, d3.event.x));
+		d.y = Math.max(0, Math.min(height - d.dy, d3.event.y));
+		d3.select(this).attr("transform", "translate(" + d.x + "," + d.y + ")");
+		sankey.relayout();
+		links.attr("d", sankey.link());
+	}
+
 	var nodes = svg.selectAll(".node").data(sankey.nodes());
 	var nodes_enter = nodes.enter().append("g").attr("class", "node");
+	nodes_enter.call(d3.behavior.drag()
+      .origin(function(d) { return d; })
+      .on("dragstart", function() { this.parentNode.appendChild(this); })
+      .on("drag", drag));
+
 	nodes.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 	nodes_enter.append("rect");
 	nodes.select("rect")
