@@ -19,11 +19,20 @@
 var width = 1200,
     height = 500;
 
-var label_padding = 6;
+var label_padding = 6,
+    default_data_file = "data.json";
 
 var defaultColor = d3.scale.category20();
 
 var svg = d3.select("div").append("svg").attr("width", width).attr("height", height);
+
+// Parse query string parameters
+var parameters = {};
+(function (query, re, match) {
+	while (match = re.exec(query)) {
+		parameters[decodeURIComponent(match[1])] = decodeURIComponent(match[2]);
+	}
+})(window.location.search.substring(1).replace(/\+/g, "%20"), /([^&=]+)=?([^&]*)/g);
 
 function overridePositions(sankey) {
 	var nodes = sankey.nodes();
@@ -98,7 +107,7 @@ function makeDiagram(diagram) {
 		});
 }
 
-d3.json("data.json", function(data) {
+d3.json(parameters.data || default_data_file, function(data) {
 	console.log(data);
 	makeDiagram(data);
 });
