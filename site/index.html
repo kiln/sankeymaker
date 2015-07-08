@@ -60,12 +60,20 @@ function makeDiagram(diagram) {
 		links.attr("d", sankey.link());
 	}
 
+	function dragend(d) {
+		console.log(JSON.stringify({
+			"x_override": d.x * 100 / width,
+			"y_override": d.y * 100 / width
+		}));
+	}
+
 	var nodes = svg.selectAll(".node").data(sankey.nodes());
 	var nodes_enter = nodes.enter().append("g").attr("class", "node");
 	nodes_enter.call(d3.behavior.drag()
       .origin(function(d) { return d; })
       .on("dragstart", function() { this.parentNode.appendChild(this); })
-      .on("drag", drag));
+      .on("drag", drag)
+      .on("dragend", dragend));
 
 	nodes.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 	nodes_enter.append("rect");
