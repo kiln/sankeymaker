@@ -26,10 +26,15 @@ for node in each_csv_row(nodes_filename):
 	name = node.pop("source")
 	index = len(nodes)
 	node_index_by_name[name] = index
-	nodes.append({
+	output_node = {
 		"name": name,
-		"width": float(node["width"])
-	})
+		"width": float(node["width"]),
+	}
+	if node.get("xpos"):
+		output_node["x_override"] = float(node["xpos"])
+	if node.get("ypos"):
+		output_node["y_override"] = float(node["ypos"])
+	nodes.append(output_node)
 
 outflows = {}
 inflows = {}
