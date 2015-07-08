@@ -6,14 +6,22 @@
 <script src="d3.min.js"></script>
 <script src="sankey.js"></script>
 <style>
-	.link { stroke: #000; fill: none; opacity: 0.2; }
+	.link { fill: none; stroke: black; opacity: 0.2; }
+	.link:hover { opacity: 0.5; }
+
+	.node rect { cursor: move; }
+	.node text { font-family: sans-serif; }
 </style>
 </head>
 <body>
 <div></div>
 <script>
-var width = 900,
-    height = 600;
+var width = 1200,
+    height = 500;
+
+var label_padding = 6;
+
+var defaultColor = d3.scale.category20();
 
 var svg = d3.select("div").append("svg").attr("width", width).attr("height", height);
 
@@ -41,7 +49,8 @@ function makeDiagram(diagram) {
 	links
 		.attr("d", sankey.link())
 		.attr("stroke-width", function(d) { return Math.max(1, d.dy); })
-		.attr("stroke", function(d) { return d.color; });
+		.attr("stroke", function(d) { return d.color; })
+		.style("opacity", function(d) { return d.opacity; });
 
 	var nodes = svg.selectAll(".node").data(sankey.nodes());
 	var nodes_enter = nodes.enter().append("g").attr("class", "node");
@@ -50,12 +59,22 @@ function makeDiagram(diagram) {
 	nodes.select("rect")
 		.attr("width", function(d) { return d.dx; })
 		.attr("height", function(d) { return d.dy; })
-		.attr("fill", function(d) { return d.color; })
+		.attr("fill", function(d) { return d.color || defaultColor(d.name); })
+		.attr("stroke", function(d) { return d3.rgb(this.getAttribute("fill")).darker(1); })
 		.attr("opacity", function(d) { return d.opacity; });
 
 	nodes_enter.append("text");
 	nodes.select("text")
-		.text(function(d) { return d.name; });
+		.text(function(d) { return d.name; })
+		.attr("y", function(d) { return d.dy/2 + 6; })
+		.attr("x", function(d) {
+			if (d.x < width/2) return d.dx + label_padding;
+			else return -label_padding;
+		})
+		.attr("text-anchor", function(d) {
+			if (d.x < width/2) return "start";
+			else return "end";
+		});
 }
 
 d3.json("data.json", function(data) {
