@@ -6,6 +6,11 @@ import csv
 import json
 import sys
 
+# Should we have a dummy outflow node for every real node that needs one,
+# or a single dummy outflow node that receives unaccounted-for outflows
+# from everywhere.
+JUST_ONE_DUMMY_OUTFLOW_NODE = False
+
 nodes_filename, edges_filename = sys.argv[1:]
 
 def each_csv_row(filename):
@@ -37,13 +42,14 @@ for edge in each_csv_row(edges_filename):
 	inflows[target_index] = inflows.get(target_index, 0) + value
 	edges.append(edge)
 
+has_dummy_outflow_node = False
 for i, node in enumerate(nodes):
 	inflow = inflows.get(i, 0)
 	outflow = outflows.get(i, 0)
 	if 0 < inflow < outflow:
 		dummy_node_index = len(nodes)
 		nodes.append({
-			"name": "inflow mismatch from " + str(i)
+			"name": ""
 		})
 		edges.append({
 			"source": dummy_node_index,
@@ -51,14 +57,21 @@ for i, node in enumerate(nodes):
 			"value": outflow - inflow
 		})
 	elif 0 < outflow < inflow:
-		dummy_node_index = len(nodes)
-		nodes.append({
-			"name": "outflow mismatch from " + str(i)
-		})
+		if has_dummy_outflow_node:
+			dummy_node_index = len(nodes) - 1
+		else:
+			dummy_node_index = len(nodes)
+			nodes.append({
+				"name": "",
+				"opacity": 0
+			})
+			if JUST_ONE_DUMMY_OUTFLOW_NODE:
+				has_dummy_outflow_node = True
 		edges.append({
 			"source": i,
 			"target": dummy_node_index,
-			"value": inflow - outflow
+			"value": inflow - outflow,
+			"opacity": 0
 		})
 
 json.dump({
