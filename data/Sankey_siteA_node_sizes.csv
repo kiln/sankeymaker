@@ -1,11 +1,26 @@
-height,width,source,notes
-4976,0,group0,These have no widths because these first two are the entry categories so nobody spends time in them
-758,0,group1,These have no widths because these first two are the entry categories so nobody spends time in them
-657,2.92224,group2,
-1129,1.735399,group3,
-3199,1.837216,group4,
-1339,2.496291,group5,
-1568,0.4591108,group6,
-1471,2.703706,group7,
-477,1.072748,group8,
-690,0,group9,
+height,width,source,notes,ypos,xpos
+0,0,"group.","",,
+4976,0,"group0","These have no widths because these first two are the entry categories so nobody spends time in them",0,0
+758,0,"group1","These have no widths because these first two are the entry categories so nobody spends time in them",80,0
+657,3.461249,"group2","",70,20
+283.5,0,"group20","",0,20
+283.5,0,"group21","",70,25
+1129,1.823276,"group3","",78,35
+216,0,"group30","",0,35
+216,0,"group31","",78,40
+3199,2.263504,"group4","",35,45
+870,0,"group40","",0,45
+870,0,"group41","",35,50
+1339,2.903667,"group5","",10,50
+407.5,0,"group50","",0,50
+407.5,0,"group51","",10,55
+1568,.4829002,"group6","",7,70
+46.5,0,"group60","",0,70
+46.5,0,"group61","",7,75
+1471,3.114467,"group7","",4,80
+471,0,"group70","",0,80
+471,0,"group71","",4,85
+477,1.69263,"group8","",0,90
+227.5,0,"group80","",0,90
+227.5,0,"group81","",0,95
+690,0,"group9","",95,95
