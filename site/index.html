@@ -6,18 +6,52 @@
 <script src="d3.min.js"></script>
 <script src="sankey.js"></script>
 <style>
-
+	.link { stroke: #000; fill: none; opacity: 0.2; }
 </style>
 </head>
 <body>
+<div></div>
 <script>
-var sankey = d3.sankey()
-    .size([width, height])
-    .nodeWidth(15)
-    .nodePadding(10)
-    .nodes(diagram.nodes)
-    .links(diagram.links)
-    .layout(32);
+var width = 900,
+    height = 600;
+
+var svg = d3.select("div").append("svg").attr("width", width).attr("height", height);
+
+function makeDiagram(diagram) {
+	var sankey = d3.sankey()
+	    .size([width, height])
+	    .nodeWidth(15)
+	    .nodePadding(10)
+	    .nodes(diagram.nodes)
+	    .links(diagram.links)
+	    .layout(32);
+
+	var links = svg.selectAll(".link").data(sankey.links());
+	links.enter().append("path").attr("class", "link");
+	links
+		.attr("d", sankey.link())
+		.attr("stroke-width", function(d) { return Math.max(1, d.dy); })
+		.attr("stroke", function(d) { return d.color; });
+
+	var nodes = svg.selectAll(".node").data(sankey.nodes());
+	var nodes_enter = nodes.enter().append("g").attr("class", "node");
+	nodes.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	nodes_enter.append("rect");
+	nodes.select("rect")
+		.attr("height", function(d) { return d.dy; })
+		.attr("width", function(d) { console.log(d, d.width); return d.width || sankey.nodeWidth(); })
+		.attr("fill", function(d) { return d.color; })
+		.attr("opacity", function(d) { return d.opacity; });
+
+	nodes_enter.append("text");
+	nodes.select("text")
+		.text(function(d) { return d.name; });
+}
+
+d3.json("data.json", function(data) {
+	console.log(data);
+	makeDiagram(data);
+});
 
 </script>
 </body>
