@@ -34,7 +34,7 @@ for edge in each_csv_row(edges_filename):
 	edge["source"] = source_index = node_index_by_name[edge["source"]]
 	edge["target"] = target_index = node_index_by_name[edge["target"]]
 	outflows[source_index] = outflows.get(source_index, 0) + value
-	inflows[target_index] = outflows.get(target_index, 0) + value
+	inflows[target_index] = inflows.get(target_index, 0) + value
 	edges.append(edge)
 
 for i, node in enumerate(nodes):
