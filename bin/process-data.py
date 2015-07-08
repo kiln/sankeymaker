@@ -20,10 +20,11 @@ node_index_by_name = {}
 for node in each_csv_row(nodes_filename):
 	name = node.pop("source")
 	index = len(nodes)
-	node["name"] = name
-	node["width"] = float(node["width"])
 	node_index_by_name[name] = index
-	nodes.append(node)
+	nodes.append({
+		"name": name,
+		"width": float(node["width"])
+	})
 
 outflows = {}
 inflows = {}
