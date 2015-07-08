@@ -61,5 +61,5 @@ for i, node in enumerate(nodes):
 
 json.dump({
 	"nodes": nodes,
-	"edges": edges,
+	"links": edges,
 }, sys.stdout)
