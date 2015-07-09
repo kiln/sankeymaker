@@ -96,6 +96,7 @@ function makeDiagram(diagram) {
 	nodes_enter.append("text");
 	nodes.select("text")
 		.text(function(d) { return d.name; })
+		.attr("opacity", function(d) { return d.label_opacity; })
 		.attr("y", function(d) { return d.dy/2 + 6; })
 		.attr("x", function(d) {
 			if (d.x < width/2) return d.dx + label_padding;
