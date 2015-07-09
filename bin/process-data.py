@@ -92,4 +92,4 @@ for i, node in enumerate(nodes):
 json.dump({
 	"nodes": nodes,
 	"links": edges,
-}, sys.stdout)
+}, sys.stdout, indent=4)
