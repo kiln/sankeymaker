@@ -4,6 +4,7 @@ from __future__ import division
 
 import csv
 import json
+import re
 import sys
 
 # Should we have a dummy outflow node for every real node that needs one,
@@ -34,6 +35,15 @@ for node in each_csv_row(nodes_filename):
 		output_node["x_override"] = float(node["xpos"])
 	if node.get("ypos"):
 		output_node["y_override"] = float(node["ypos"])
+	if node.get("node_colour"):
+		color_string = node["node_colour"]
+		mo = re.match(r"^(\d+) (\d+) (\d+)$", color_string)
+		if mo:
+			output_node["color"] = "rgb({},{},{})".format(*mo.groups())
+		else:
+			output_node["color"] = color_string
+	if node.get("node_opacity"):
+		output_node["opacity"] = float(node["node_opacity"]) / 100
 	nodes.append(output_node)
 
 outflows = {}

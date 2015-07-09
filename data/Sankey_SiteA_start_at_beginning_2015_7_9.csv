@@ -1,0 +1,50 @@
+value,target,source,flow_opacity,flow_colour,flow_fade
+475,group2,group0,40,grey,no
+946,group3,group0,40,grey,no
+2405,group4,group0,40,grey,no
+777,group5,group0,40,grey,no
+283,group6,group0,40,grey,no
+77,group7,group0,40,grey,no
+13,group8,group0,40,grey,no
+182,group2,group1,40,grey,no
+183,group3,group1,40,grey,no
+292,group4,group1,40,grey,no
+69,group5,group1,40,grey,no
+18,group6,group1,40,grey,no
+13,group7,group1,40,grey,no
+1,group8,group1,40,grey,no
+1,group4,group2,80,grey,no
+1,group5,group2,80,grey,no
+2,group6,group2,80,grey,no
+86,group9,group2,80,grey,no
+283.5,group20,group2,40,grey,yes
+283.5,group21,group2,0,grey,no
+501,group4,group3,80,209 18 66,no
+130,group5,group3,80,210 18 66,no
+42,group6,group3,80,211 18 66,no
+24,group9,group3,80,212 18 66,no
+216,group30,group3,40,213 18 66,yes
+216,group31,group3,0,214 18 66,no
+362,group5,group4,80,101 45 137,no
+900,group6,group4,80,102 45 137,no
+11,group8,group4,80,103 45 137,no
+186,group9,group4,80,104 45 137,no
+870,group40,group4,40,105 45 137,yes
+870,group41,group4,0,106 45 137,no
+323,group6,group5,80,28 63 148,no
+1,group8,group5,80,29 63 148,no
+200,group9,group5,80,30 63 148,no
+407.5,group50,group5,40,31 63 148,yes
+407.5,group51,group5,0,32 63 148,no
+1381,group7,group6,80,220 236 182,no
+11,group8,group6,80,221 236 182,no
+83,group9,group6,80,222 236 182,no
+46.5,group60,group6,40,223 236 182,yes
+46.5,group61,group6,0,224 236 182,no
+440,group8,group7,80,141 198 63,no
+89,group9,group7,80,142 198 63,no
+471,group70,group7,40,143 198 63,yes
+471,group71,group7,0,144 198 63,no
+22,group9,group8,80,242 101 49,no
+227.5,group80,group8,40,243 101 49,yes
+227.5,group81,group8,0,244 101 49,no
