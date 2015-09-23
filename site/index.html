@@ -41,6 +41,7 @@ function overridePositions(sankey) {
 		if (node.x_override) node.x = node.x_override * width / 100;
 		if (node.y_override) node.y = node.y_override * height / 100;
 	}
+	sankey.relayout();
 }
 
 function makeDiagram(diagram) {
