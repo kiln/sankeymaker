@@ -2,12 +2,13 @@ var FILES = ["first.json", "second.json"];
 var loaded_data = {},
     number_of_files_loaded = 0;
 for (var i = 0; i < FILES.length; i++) {
-	var url = FILES[i];
-	d3.json(url, function(data) {
-		loaded_data[url] = data;
-		number_of_files_loaded += 1;
-		if (number_of_files_loaded == FILES.length) initSankey();
-	});
+	(function(url) {
+		d3.json(url, function(data) {
+			loaded_data[url] = data;
+			number_of_files_loaded += 1;
+			if (number_of_files_loaded == FILES.length) initSankey();
+		});
+	})(FILES[i]);
 }
 
 var sankey;
