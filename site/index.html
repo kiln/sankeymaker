@@ -5,7 +5,7 @@
 <title>Sankey diagram</title>
 <script src="d3.min.js"></script>
 <script src="sankey.js"></script>
-<script src="sankeymaker.js"></script>
+<script src="kiln_sankey.js"></script>
 <style>
 	.link { fill: none; stroke: black; opacity: 0.2; }
 	.link:hover { opacity: 0.5; }
@@ -20,9 +20,18 @@
 var width = 1200,
     height = 500;
 
+var default_data_file = "data.json";
+
+// Parse query string parameters
+var parameters = {};
+(function (query, re, match) {
+	while (match = re.exec(query)) {
+		parameters[decodeURIComponent(match[1])] = decodeURIComponent(match[2]);
+	}
+})(window.location.search.substring(1).replace(/\+/g, "%20"), /([^&=]+)=?([^&]*)/g);
+
 d3.json(parameters.data || default_data_file, function(data) {
-	console.log(data);
-	makeDiagram(data, "div", width, height);
+	Kiln.sankey("div").data(data).width(width).height(height).draggable(true).draw();
 });
 
 </script>
