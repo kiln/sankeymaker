@@ -73,7 +73,7 @@ function makeDiagram(diagram) {
 	function dragend(d) {
 		console.log(JSON.stringify({
 			"x_override": d.x * 100 / width,
-			"y_override": d.y * 100 / width
+			"y_override": d.y * 100 / height
 		}));
 	}
 
